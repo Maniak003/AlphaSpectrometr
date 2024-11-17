@@ -54,11 +54,11 @@ DMA_HandleTypeDef hdma_usart1_rx;
 
 /* USER CODE BEGIN PV */
 char uartBuffer[400] = {0,};
-uint8_t ctrlChar[1] = {0,}, currentLevel = 128;
+uint8_t ctrlChar[1] = {0,}, currentLevel = 255;
 uint32_t specterBuffer[SPECTER_SIZE] = {0,};
 uint32_t pulseCounter = 0, measurementTime = 0;
 uint32_t pulseLevel[1];
-uint16_t dac_level = 512;
+uint16_t dac_level = 50;
 bool reqToSpecter = false;
 /* USER CODE END PV */
 
@@ -369,7 +369,7 @@ static void MX_ADC1_Init(void)
   */
   sConfig.Channel = ADC_CHANNEL_1;
   sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_640CYCLES_5;
+  sConfig.SamplingTime = ADC_SAMPLETIME_92CYCLES_5;
   sConfig.SingleDiff = ADC_SINGLE_ENDED;
   sConfig.OffsetNumber = ADC_OFFSET_NONE;
   sConfig.Offset = 0;
