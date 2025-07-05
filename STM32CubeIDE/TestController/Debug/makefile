@@ -60,8 +60,8 @@ all: main-build
 main-build: TestController.elf secondary-outputs
 
 # Tool invocations
-TestController.elf TestController.map: $(OBJS) $(USER_OBJS) /home/ed/work/gitprojects/AlphaSpectrometer/STM32CubeIDE/TestController/STM32G473CBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "TestController.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/ed/work/gitprojects/AlphaSpectrometer/STM32CubeIDE/TestController/STM32G473CBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="TestController.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+TestController.elf TestController.map: $(OBJS) $(USER_OBJS) /home/ed/work/github/AlphaSpectrometer/STM32CubeIDE/TestController/STM32G473CBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "TestController.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/ed/work/github/AlphaSpectrometer/STM32CubeIDE/TestController/STM32G473CBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="TestController.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
