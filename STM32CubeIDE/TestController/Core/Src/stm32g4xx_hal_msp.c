@@ -195,7 +195,28 @@ void HAL_ADC_MspDeInit(ADC_HandleTypeDef* hadc)
 void HAL_DAC_MspInit(DAC_HandleTypeDef* hdac)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-  if(hdac->Instance==DAC2)
+  if(hdac->Instance==DAC1)
+  {
+  /* USER CODE BEGIN DAC1_MspInit 0 */
+
+  /* USER CODE END DAC1_MspInit 0 */
+    /* Peripheral clock enable */
+    __HAL_RCC_DAC1_CLK_ENABLE();
+
+    __HAL_RCC_GPIOA_CLK_ENABLE();
+    /**DAC1 GPIO Configuration
+    PA4     ------> DAC1_OUT1
+    */
+    GPIO_InitStruct.Pin = AdjHV_Pin;
+    GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    HAL_GPIO_Init(AdjHV_GPIO_Port, &GPIO_InitStruct);
+
+  /* USER CODE BEGIN DAC1_MspInit 1 */
+
+  /* USER CODE END DAC1_MspInit 1 */
+  }
+  else if(hdac->Instance==DAC2)
   {
   /* USER CODE BEGIN DAC2_MspInit 0 */
 
@@ -227,7 +248,24 @@ void HAL_DAC_MspInit(DAC_HandleTypeDef* hdac)
 */
 void HAL_DAC_MspDeInit(DAC_HandleTypeDef* hdac)
 {
-  if(hdac->Instance==DAC2)
+  if(hdac->Instance==DAC1)
+  {
+  /* USER CODE BEGIN DAC1_MspDeInit 0 */
+
+  /* USER CODE END DAC1_MspDeInit 0 */
+    /* Peripheral clock disable */
+    __HAL_RCC_DAC1_CLK_DISABLE();
+
+    /**DAC1 GPIO Configuration
+    PA4     ------> DAC1_OUT1
+    */
+    HAL_GPIO_DeInit(AdjHV_GPIO_Port, AdjHV_Pin);
+
+  /* USER CODE BEGIN DAC1_MspDeInit 1 */
+
+  /* USER CODE END DAC1_MspDeInit 1 */
+  }
+  else if(hdac->Instance==DAC2)
   {
   /* USER CODE BEGIN DAC2_MspDeInit 0 */
 

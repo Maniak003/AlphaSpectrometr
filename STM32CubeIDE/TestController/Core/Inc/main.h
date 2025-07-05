@@ -66,6 +66,8 @@ void Error_Handler(void);
 #define AnalogIn_GPIO_Port GPIOA
 #define LED_Pin GPIO_PIN_3
 #define LED_GPIO_Port GPIOA
+#define AdjHV_Pin GPIO_PIN_4
+#define AdjHV_GPIO_Port GPIOA
 #define Comp_level_Pin GPIO_PIN_6
 #define Comp_level_GPIO_Port GPIOA
 #define PULSE_CLIBRATE_Pin GPIO_PIN_11
