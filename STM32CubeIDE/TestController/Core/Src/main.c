@@ -59,7 +59,7 @@ uint8_t ctrlChar[1] = {0,}, currentLevel = 255;
 uint32_t specterBuffer[SPECTER_SIZE] = {0,};
 uint32_t pulseCounter = 0, measurementTime = 0;
 uint32_t pulseLevel[1];
-uint16_t dac_level = 50;
+uint16_t dac_level = 3500;
 bool reqToSpecter = false;
 /* USER CODE END PV */
 
@@ -133,7 +133,7 @@ int main(void)
   MX_DAC1_Init();
   /* USER CODE BEGIN 2 */
 
-  HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
 
   bzero((char *) uartBuffer, sizeof(uartBuffer));
   sprintf(uartBuffer, "Start AlphaSpectrometer.\n\r");
@@ -176,7 +176,7 @@ int main(void)
   while (1)
   {
 	  HAL_Delay(50);
-	  //HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+	  HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
 	  //HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
 	  //HAL_Delay(100);
 	  uint32_t sm = 0;
@@ -185,7 +185,7 @@ int main(void)
 	  }
 	  uint32_t tm = ( HAL_GetTick() - measurementTime) / 1000;
 	  bzero((char *) uartBuffer, sizeof(uartBuffer));
-	  sprintf(uartBuffer, "Time: %lu, Count: %lu, Rate: %0.4f cps, Summ: %lu, DAC: %u, AMP: %u          \r", tm, pulseCounter, (float) pulseCounter / tm, sm, dac_level, currentLevel);
+	  sprintf(uartBuffer, "Time: %lu, Count: %lu, Rate: %0.4f cps, Summ: %lu, Comparator[p/m]: %u, HV[+/-]: %u          \r", tm, pulseCounter, (float) pulseCounter / tm, sm, dac_level, currentLevel);
 	  HAL_UART_Transmit(&huart1, (uint8_t *) uartBuffer, strlen(uartBuffer), 100);
 
 	  if (reqToSpecter) {
@@ -340,7 +340,7 @@ static void MX_ADC1_Init(void)
   /** Common config
   */
   hadc1.Instance = ADC1;
-  hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV10;
+  hadc1.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV16;
   hadc1.Init.Resolution = ADC_RESOLUTION_12B;
   hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
   hadc1.Init.GainCompensation = 0;
